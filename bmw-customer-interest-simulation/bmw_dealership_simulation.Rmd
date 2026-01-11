@@ -1,0 +1,64 @@
+---
+title: "R Coding Assignment 2: BMW Viewing Interest Simulation"
+author: "Aiden Jajo"
+subtitle: "San Diego State University - STAT550"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Scenario
+
+The BMW of Carlsbad dealership wants to know which BMW models have the most interest from customer requests to view each vehicle. The models available at the BMW dealership are:
+
+- 2 Series
+- 3 Series
+- 4 Series
+- 5 Series
+- 7 Series
+- i4
+- i5
+- i7
+- ix
+- x2
+- x3
+- x5
+- x6
+- x7
+- XM
+
+In order to estimate the interest in the BMW models from customers, the simulation will sample 1000 customer requests to view the models available at the BMW Carlsbad location.
+```{r BMW Models}
+# Define vector of all BMW models available at the dealership
+bmw_models = c("2 Series", 
+               "3 Series", 
+               "4 Series", 
+               "5 Series", 
+               "7 Series", 
+               "i4", 
+               "i5", 
+               "i7", 
+               "ix", 
+               "x2", 
+               "x3", 
+               "x5", 
+               "x6", 
+               "x7", 
+               "XM")
+
+# Initialize empty vector to store simulated customer requests
+view_intrest = c()
+
+# Simulate 1000 customer viewing requests
+# Each iteration randomly selects one BMW model with equal probability
+for (i in 1:1000) {
+  model = sample(bmw_models, 1)
+  view_intrest = c(view_intrest, model)
+}
+
+# Create frequency table showing number of requests per model
+# Uses kable for formatted table output
+library(knitr)
+kable(as.data.frame(table(view_intrest)), col.names = c("Model", "Requests"))
+```
