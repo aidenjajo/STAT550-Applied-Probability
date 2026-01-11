@@ -1,0 +1,90 @@
+---
+title: "R Coding Assignment 3: Binomial Probability Distributions"
+author: "Aiden Jajo"
+subtitle: "San Diego State University - STAT550"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+This assignment applies binomial probability distributions to solve real-world probability problems. The binomial distribution models the number of successes in a fixed number of independent trials, each with the same probability of success.
+
+**Key R Functions Used:**
+- `dbinom(x, n, p)`: Probability of exactly x successes
+- `pbinom(x, n, p)`: Cumulative probability of x or fewer successes
+
+---
+
+## Question 1: Drug Side Effects Analysis
+
+**Scenario:** If 10% of people who are given a certain drug experience dizziness, find these probabilities for a sample of 25 people who take the drug.
+
+### Question 1.A) Exactly 3 people will become dizzy
+```{r}
+# dbinom calculates P(X = 3) where X ~ Binomial(n=25, p=0.10)
+# Parameters: x=3 successes, n=25 trials, p=0.10 probability
+dbinom(3, 25, 0.10)
+```
+**Interpretation:** There is approximately a 22.6% probability that exactly 3 out of 25 people will experience dizziness.
+
+### Question 1.B) At least 9 people will become dizzy
+```{r}
+# P(X >= 9) = 1 - P(X <= 8)
+# pbinom gives cumulative probability, so we subtract from 1
+1 - pbinom(8, 25, 0.10)
+```
+**Interpretation:** There is approximately a 0.046% probability that 9 or more people will experience dizziness. This is a very rare event.
+
+### Question 1.C) Less than 7 people will become dizzy
+```{r}
+# P(X < 7) = P(X <= 6)
+# pbinom directly gives cumulative probability
+pbinom(6, 25, 0.10)
+```
+**Interpretation:** There is approximately a 99.1% probability that fewer than 7 people will experience dizziness.
+
+---
+
+## Question 2: Green Bottles Probability
+
+**Scenario:** There were ten green bottles sitting on the wall. The probability of a green bottle accidentally falling is 0.95. What is the probability that fewer than 8 of the green bottles accidentally fall?
+```{r}
+# P(X < 8) = P(X <= 7) where X ~ Binomial(n=10, p=0.95)
+# With such a high probability of falling (0.95), we expect most bottles to fall
+pbinom(7, 10, 0.95)
+```
+**Interpretation:** There is approximately a 1.2% probability that fewer than 8 bottles will fall. Given the high probability (95%) of each bottle falling, it's very likely that 8 or more will fall.
+
+---
+
+## Question 3: Defective Tires Quality Control
+
+**Scenario:** The LMB Company manufactures tires. They claim that only 0.007 (0.7%) of LMB tires are defective. What is the probability of finding 2 defective tires in a random sample of 50 LMB tires?
+```{r}
+# P(X = 2) where X ~ Binomial(n=50, p=0.007)
+# This models quality control with a very low defect rate
+dbinom(2, 50, 0.007)
+```
+**Interpretation:** There is approximately a 4.3% probability of finding exactly 2 defective tires in a sample of 50. This suggests the defect rate claim is reasonable if we observe 2 defects.
+
+---
+
+## Key Takeaways
+
+1. **Binomial Distribution** is appropriate when:
+   - Fixed number of independent trials (n)
+   - Each trial has two outcomes (success/failure)
+   - Constant probability of success (p)
+
+2. **Function Selection:**
+   - Use `dbinom()` for "exactly x" probabilities
+   - Use `pbinom()` for "at most x" or cumulative probabilities
+   - Use `1 - pbinom()` for "at least x" probabilities
+
+3. **Real-World Applications:**
+   - Drug efficacy and side effects analysis
+   - Quality control and defect detection
+   - Risk assessment and decision-making
