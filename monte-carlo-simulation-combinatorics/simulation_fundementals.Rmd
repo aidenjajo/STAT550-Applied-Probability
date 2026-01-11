@@ -1,0 +1,72 @@
+---
+title: "R Coding Assignment 1"
+author: "Aiden Jajo"
+subtitle: "San Diego State University - STAT550"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+### R A First Look at Simulation
+
+This section of the text introduces the concept of Monte Carlo simulation, along with some R commands using two examples (which are provided below or as script files). The first code starts with Example 1.32.
+```{r example 1}
+n <- 100 #set for example
+
+# Generate random binary outcomes (0 or 1) simulating coin flips
+sample(0:1, n, replace = TRUE)
+
+# Calculate mean - theoretical expectation is 0.5 for fair coin
+mean(sample(0:1, n, replace = TRUE))
+```
+
+### try creating a sample now
+
+use the code above and make a sample of sampling from the digits 0-9 and find the mean.
+```{r Code here 1}
+n <- 100
+
+# Sample from digits 0-9 with replacement
+sample_0_to_9 <- sample(0:9, n, replace = TRUE)
+sample_0_to_9
+
+# Calculate mean - expected value is 4.5
+mean(sample_0_to_9)
+```
+
+### Here are some of the functions that will be useful as we go through the course.
+
+choose(n,k) - computes combination of choosing k objects from n. 
+prod(n:m) - computes the product of values from n to m. To do a permutation of r objects out of n, you want to use prod(n:n-r+1). (For whatever reason, this doesn't work if you assign n and r first, just put in the numbers). 
+factorial(x) - computes x!
+```{r example 2}
+# Combinations: order doesn't matter
+choose(n = 10, k = 2)
+## [1] 45
+
+# Permutations: order matters
+prod(8:6) # permutation of 3 objects out of 8
+## [1] 336
+
+# Factorial: total arrangements
+factorial(x = 4)
+##[1] 24
+```
+
+## Try the following
+
+Find how many ways you can select 10 things from a group of 30
+
+Find the total possible ways to arrange 10 people in a line for a photo.
+
+Find 9!
+```{r practice}
+# Combination: selecting 10 from 30
+choose(30, 10)
+
+# Permutation: arranging 10 people in line
+factorial(10)
+
+# Factorial calculation
+factorial(9)
+```
